@@ -151,7 +151,7 @@ class Signal<RT(Args...)> : private Observer
     template <typename L>
     void connect(L* instance)
     {
-        Observer::insert(Delegate::template bind (instance), this);
+        Observer::insert(Delegate::template bind<L>(instance), this);
     }
     template <typename L>
     void connect(L& instance)
@@ -202,7 +202,7 @@ class Signal<RT(Args...)> : private Observer
     >::type
     disconnect(L* instance)
     {
-        Observer::remove(Delegate::template bind (instance), this);
+        Observer::remove(Delegate::template bind<L>(instance), this);
     }
     template <typename L>
     typename std::enable_if<
